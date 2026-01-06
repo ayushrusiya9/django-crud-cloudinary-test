@@ -1,17 +1,26 @@
 from django.shortcuts import render, redirect
 from .models import Student
 from django.contrib import messages
+from django.db.models import Q
 
 
 # Create your views here.
 def home(request):
-    return render(request, 'home.html')
-
+    query = request.GET.get('q')
+    if query:
+        students = Student.objects.filter(Q(name__icontains=query) | Q(city__icontains=query))
+    else:
+        students = Student.objects.all()
+    return render(request, 'home.html',{'students': students})
 
 def student_list(request):
-    students = Student.objects.all()
-    return render(request, 'student_list.html', {'students': students})
+    query = request.GET.get('q')
+    if query:
+        students = Student.objects.filter(Q(name__icontains=query) | Q(city__icontains=query))
+    else:
+        students = Student.objects.all()
 
+    return render(request, 'student_list.html', {'students': students})
 
 def student_create(request):
     if request.method == 'POST':

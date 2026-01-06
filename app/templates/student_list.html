@@ -10,6 +10,24 @@
         </a>
     </div>
 
+    <!-- Search Bar -->
+<form method="get" class="mb-3 d-flex gap-2">
+    <input 
+        type="text" 
+        name="q" 
+        class="form-control"
+        placeholder="Search by name or city..."
+        value="{{ request.GET.q }}"
+    >
+    <button type="submit" class="btn btn-primary">
+        Search
+    </button>
+    <a href="{% url 'student_list' %}" class="btn btn-secondary">
+        Reset
+    </a>
+</form>
+
+
     <!-- Messages -->
     {% if messages %}
         {% for message in messages %}
