@@ -114,7 +114,6 @@ def cart_detail(request):
         'cart_items': cart_items
     })
 
-
 def cart_remove(request, id):
     cart = request.session.get('cart', [])
 
